@@ -4,9 +4,13 @@ var routerConfig = {
 var serverConfig = {
 	port:8080
 };
+var fileConfig = {
+	downloadBase:"/home/chen/Documents/"
+};
 var config = {
 	server:serverConfig,
-	router:routerConfig
+	router:routerConfig,
+	file:fileConfig
 };
 exports.config = function () {
 	return config;
