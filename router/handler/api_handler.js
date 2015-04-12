@@ -1,14 +1,9 @@
 /*return object*/
 var rv = {
-	timeoutTest:timeoutTest,
-	jsonTest:jsonTest
+	//timeoutTest:timeoutTest,
 };
-
-function timeoutTest() {
-}
-function jsonTest(req,res) {
-	res.send(JSON.stringify({"name":"chen"}));
-}
+//function timeoutTest() {
+//}
 exports.get = function() {
 	return rv;
 };

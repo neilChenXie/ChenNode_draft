@@ -11,21 +11,32 @@ function downloadHanddler(req, res) {
 	var	down_path = req.url;
 	//var file = __dirname + '/../..'+down_path;
 	var file = config.file.downloadBase+down_path;
-	console.log(file);
+	//console.log(file);
 
 	fs.exists(file,function(exist) {
 		if(exist) {
+			
+			/*set MIME type*/
 			mimetype = mime.lookup(file);
-			//if(mimetype) {
-			res.setHeader("Content-disposition",'attachment; filename='+filename);
 			res.setHeader("Content-type",mimetype);
+
+			/*set filename*/
+			res.setHeader("Content-disposition",'attachment; filename='+filename);
+
+			/*start transition*/
 			var filestream = fs.createReadStream(file);
 			filestream.pipe(res);
 		} else {
-			res.send("file is not exist");
+
+			/*file noe exist*/
+			msg = "file is not exist";
+			res.send(msg);
+			console.error(req.url+" "+msg);
 		}
 	});
 }
+
+/*exports the module*/
 exports.get = function() {
 	return rv;
 };

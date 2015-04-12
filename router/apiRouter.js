@@ -7,7 +7,7 @@ var handler = require('./handler/handler').get();
 router.use(function timeLog(req, res, next) {
 	/*record request information*/
 	var entry;
-	entry = "Time: "+Date.now()+" ";
+	entry = "/api ";
 	entry += "PATH: "+req.url;
 	console.log(entry);
 	/*set timeout*/
@@ -17,30 +17,18 @@ router.use(function timeLog(req, res, next) {
 		/*print err msg*/
 		entry += "Timeout";
 		entry = "err: " + entry;
-		console.log(entry);
+		console.error(entry);
 	});
 	next();
 });
 /*****************************************/
 
 /************get functions************/
+router.get('/', handler.test.timeoutTest);
+router.get('/test', handler.test.jsonTest);
 
-// define the home page route
-//router.get('/', function(req, res) {
-//	//res.send('Birds home page');
-//	//res.redirect('/api/about');
-//});
-//
-//// define the about route
-//router.get('/about', function(req, res) {
-//	res.send(JSON.stringify({"name":"chen"}));
-//});
-router.get('/', handler.api.timeoutTest);
-router.get('/about', handler.api.jsonTest);
 /************post functions***********/
-//login
-//router.post('/login',function(req,res) {
-//});
+
 /************err function*************/
 router.get('*',handler.err.notFound);
 
