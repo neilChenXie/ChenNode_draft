@@ -1,6 +1,7 @@
 var fs = require("fs");
 var util = require("util");
 var express = require("express");
+var bodyParser = require("body-parser");
 var app = express();
 
 /*configuration*/
@@ -27,11 +28,21 @@ console.error = function(d) {
 
 function start() {
 
+	/*to handle POST and JSON format*/
+	app.use(bodyParser.urlencoded({ extended: false}));
+	app.use(bodyParser.json());
 	/*set route*/
 	app.use('/api',apiRouter);
 	app.use('/file',fileRouter);
 	app.use('/page',pageRouter);
 
+	/*test field*/
+	//app.post("/api/JSONecho", function(req,res){
+	//	var aa = req.body;
+	//	console.log(aa);
+	//	res.send(aa);
+	//});
+	/************/
 	/*start server*/
 	server = app.listen(config.server.port,
 			function () {

@@ -28,7 +28,7 @@ router.get('/', handler.test.timeoutTest);
 router.get('/test', handler.test.jsonTest);
 
 /************post functions***********/
-
+router.post('/JSONecho',handler.test.JSONecho);
 /************err function*************/
 router.get('*',handler.err.notFound);
 

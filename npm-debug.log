@@ -1,0 +1,53 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 warn package.json post-demo@0.0.1 No repository field.
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ '/home/chen/Dropbox/Project/Nodejs-server/APIserver',
+6 verbose install   [ 'body-parser', 'express' ] ]
+7 info preinstall post-demo@0.0.1
+8 verbose readDependencies using package.json deps
+9 verbose already installed skipping express@^4.9.0 /home/chen/Dropbox/Project/Nodejs-server/APIserver
+10 verbose already installed skipping body-parser@^1.8.1 /home/chen/Dropbox/Project/Nodejs-server/APIserver
+11 silly resolved []
+12 info build /home/chen/Dropbox/Project/Nodejs-server/APIserver
+13 verbose linkStuff [ false,
+13 verbose linkStuff   false,
+13 verbose linkStuff   false,
+13 verbose linkStuff   '/home/chen/Dropbox/Project/Nodejs-server' ]
+14 info linkStuff post-demo@0.0.1
+15 verbose linkBins post-demo@0.0.1
+16 verbose linkMans post-demo@0.0.1
+17 verbose rebuildBundles post-demo@0.0.1
+18 verbose rebuildBundles [ '.bin', 'body-parser', 'express', 'mime', 'mysql' ]
+19 verbose rebuild bundle /home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/mime
+20 info build /home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/mime
+21 info preinstall mime@1.3.4
+22 verbose linkStuff [ false,
+22 verbose linkStuff   false,
+22 verbose linkStuff   false,
+22 verbose linkStuff   '/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules' ]
+23 info linkStuff mime@1.3.4
+24 verbose linkBins mime@1.3.4
+25 verbose link bins [ { mime: 'cli.js' },
+25 verbose link bins   '/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/.bin',
+25 verbose link bins   false ]
+26 verbose linkMans mime@1.3.4
+27 verbose rebuildBundles mime@1.3.4
+28 error Error: EACCES, unlink '/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/.bin/mime'
+28 error  { [Error: EACCES, unlink '/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/.bin/mime']
+28 error   errno: 3,
+28 error   code: 'EACCES',
+28 error   path: '/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/.bin/mime' }
+29 error Please try running this command again as root/Administrator.
+30 error System Linux 3.13.0-49-generic
+31 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+32 error cwd /home/chen/Dropbox/Project/Nodejs-server/APIserver
+33 error node -v v0.10.33
+34 error npm -v 1.4.28
+35 error path /home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/.bin/mime
+36 error code EACCES
+37 error errno 3
+38 error stack Error: EACCES, unlink '/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/.bin/mime'
+39 verbose exit [ 3, true ]
