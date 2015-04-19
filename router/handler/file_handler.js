@@ -18,14 +18,23 @@ function downloadHanddler(req, res) {
 			
 			/*set MIME type*/
 			mimetype = mime.lookup(file);
-			res.setHeader("Content-type",mimetype);
+			//res.setHeader("Content-type",mimetype);
+			res.type(mimetype);
 
 			/*set filename*/
-			res.setHeader("Content-disposition",'attachment; filename='+filename);
+			//res.setHeader("Content-disposition",'attachment; filename='+filename);
+			res.set("Content-disposition",'attachment; filename='+filename);
 
 			/*start transition*/
-			var filestream = fs.createReadStream(file);
-			filestream.pipe(res);
+			//var filestream = fs.createReadStream(file);
+			//filestream.pipe(res);
+			res.download(file, function(err) {
+				if(err) {
+					console.error(err);
+				} else {
+					console.log("download succeed");
+				}
+			});
 		} else {
 
 			/*file noe exist*/

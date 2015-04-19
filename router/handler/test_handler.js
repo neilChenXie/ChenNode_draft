@@ -12,7 +12,8 @@ function jsonTest(req,res) {
 function JSONecho(req,res) {
 	var jsonMsg = req.body;
 	//console.log();
-	res.send(jsonMsg);
+	res.tyep('json');
+	res.status(200).send(jsonMsg);
 }
 exports.get = function() {
 	return rv;

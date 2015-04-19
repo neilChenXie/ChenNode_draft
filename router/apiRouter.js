@@ -29,6 +29,7 @@ router.get('/test', handler.test.jsonTest);
 
 /************post functions***********/
 router.post('/JSONecho',handler.test.JSONecho);
+router.post('/skyTmote/save',handler.api.skyTmote.save);
 /************err function*************/
 router.get('*',handler.err.notFound);
 

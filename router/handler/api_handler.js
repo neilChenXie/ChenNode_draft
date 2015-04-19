@@ -1,9 +1,15 @@
+var skyTmote = require('./apiProject/skyTmote').get();
+
 /*return object*/
 var rv = {
-	//timeoutTest:timeoutTest,
+	skyTmote:skyTmote,
 };
-//function timeoutTest() {
+
+/*general function not project related*/
+//function foo() {
+//
 //}
+
 exports.get = function() {
 	return rv;
 };

@@ -30,7 +30,7 @@ function start() {
 
 	/*to handle POST and JSON format*/
 	app.use(bodyParser.urlencoded({ extended: false}));
-	app.use(bodyParser.json());
+	app.use(bodyParser.json({ type: 'application/json' }));
 	/*set route*/
 	app.use('/api',apiRouter);
 	app.use('/file',fileRouter);
