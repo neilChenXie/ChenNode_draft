@@ -4,7 +4,11 @@ util = require('util');
 var rv = {
 	save:save
 };
-
+/* global var*/
+var Group = [];
+var rssiEst = [];
+var devi = [];
+/* file stream */
 var skyLog = fs.createWriteStream(__dirname+'/log/skyRSSI.txt', {flags: "w"});
 
 /*reload console.info to write to skyLog file*/
@@ -87,8 +91,51 @@ function save(req, res) {
 		console.error(rtnEntry);
 	}
 
+	/*save to memory table*/
+	var index = msg.bsID+"_"+msg.sensorID;
+	console.log(index);
+	calcu(index, parseInt(msg.sensorRSSI));
+
 	/*return feedback*/
 	res.send(rtnEntry);
+}
+
+function calcu(index, rssi) {
+	/* check whether the Group is existed */
+	if( typeof Group[index] == 'undefined') {
+		Group[index] = [];
+		devi[index] = 0;
+		rssiEst[index] = 0;
+	}
+	/* * * * * * * * * * * * * * * * * * * */
+	var len = Group[index].length;
+
+	/* rssi window */
+	if(len < 10) {
+		Group[index].push(rssi);
+	} else {
+		Group[index].push(rssi);
+		Group[index].shift();
+	}
+	console.log(Group[index]);
+	
+	/* new mean */
+	if(len < 10)
+		rssiEst[index] = rssiEst[index] * 0.2 + 0.8 * Group[index][len];
+	else 
+		rssiEst[index] = rssiEst[index] * 0.2 + 0.8 * Group[index][len-1];
+	console.log(rssiEst[index]);
+
+	/* new deviation */
+	if( len == 10) {
+		var squSum = 0;
+		for(var i in Group[index]) {
+			squSum += Math.pow((Group[index][i] - rssiEst[index]),2);
+		}
+		console.log(squSum);
+		devi[index] = squSum / 10;
+		console.log(devi[index]);
+	}
 }
 
 exports.get = function() {
