@@ -8,3 +8,4 @@ Notes:
 2015-0413: add log system
 2015-0417: add POST and JSON support
 2015-0418: add skyProject under /api router
+2015-0420: add RTT-estimation like RSSI algorithm in /api/skyTmote project. Managed models folder.
