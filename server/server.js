@@ -16,12 +16,13 @@ var pageRouter = require("../router/pageRouter.js");
 var debug_log = fs.createWriteStream(__dirname + '/../log/debug.txt', {flags : 'w'});
 var error_log = fs.createWriteStream(__dirname + '/../log/error.txt', {flags : 'w'});
 var stdout = process.stdout;
-var msgHead = "Time: "+Date.now()+" ";
 console.log = function(d) { //
+	var msgHead = "Time: "+Date.now()+" ";
 	debug_log.write(util.format(msgHead+d) + '\n');
 	stdout.write(util.format(msgHead+d) + '\n');
 };
 console.error = function(d) {
+	var msgHead = "Time: "+Date.now()+" ";
 	error_log.write(util.format(msgHead+__dirname+" "+d) + '\n');
 	stdout.write(util.format(msgHead+__dirname+" "+d) + '\n');
 };
