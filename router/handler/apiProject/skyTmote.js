@@ -107,26 +107,29 @@ function calcu(sID, bID, rssi,timeStamp) {
 	}
 
 	/* decide whether need coordinate calculation */
-	if( typeof sensorTime[sID] == 'undefined' ) {
-		/* initial recorder */
-		sensorTime[sID] = timeStamp;
-		sensorCount[sID] = 1;
-	} else if ( timeStamp > sensorTime[sID] ) {
-		/* renew recorder */
-		sensorTime[sID] = timeStamp;
-		sensorCount[sID] = 1;
-	} else if (timeStamp === sensorTime[sID]) {
-		/* add recorder */
-		sensorCount[sID]++;
-		if(sensorCount[sID] === 3) {
-			/* enough for this timeStamp */
-			var tmpTime = sensorTime[sID];
-			sensorTime[sID]++;
-			sensorCount[sID] = 0;
-			localize(sID,tmpTime);
+	if( len == 10) {
+		/* whatif the sender restarted??? */
+		if( typeof sensorTime[sID] == 'undefined' ) {
+			/* initial recorder */
+			sensorTime[sID] = timeStamp;
+			sensorCount[sID] = 1;
+		} else if ( timeStamp > sensorTime[sID] ) {
+			/* renew recorder */
+			sensorTime[sID] = timeStamp;
+			sensorCount[sID] = 1;
+		} else if (timeStamp === sensorTime[sID]) {
+			/* add recorder */
+			sensorCount[sID]++;
+			if(sensorCount[sID] === 3) {
+				/* enough for this timeStamp */
+				var tmpTime = sensorTime[sID];
+				sensorTime[sID]++;
+				sensorCount[sID] = 0;
+				localize(sID,tmpTime);
+			}
+		} else {
+			/* do nothing for overtime packet here */
 		}
-	} else {
-		/* do nothing for overtime packet here */
 	}
 	console.log("new index:" + sensorTime[sID]);
 	console.log("sensor counter:" + sensorCount[sID]);
@@ -136,8 +139,14 @@ function calcu(sID, bID, rssi,timeStamp) {
 function localize(sID, timeStamp) {
 	/* scan all baseStation */
 	var recorder = [];
+	recorder[0] = Object.create(null);
+	recorder[1] = Object.create(null);
+	recorder[2] = Object.create(null);
 	var index = 0;
 	for(var i in sensorList[sID].bsList) {
+		//console.log(i);
+		//console.log("time stamp: "+timeStamp);
+		//console.log("sensor last: "+sensorList[sID].bsList[i].rssiTime[9]);
 		if(sensorList[sID].bsList[i].rssiTime[9] >= timeStamp) {
 			/* need record */
 			recorder[index].bsID = i;
@@ -158,23 +167,44 @@ function localize(sID, timeStamp) {
 	z1 = baseStation[recorder[0].bsID].Z;
 	z2 = baseStation[recorder[1].bsID].Z;
 	z3 = baseStation[recorder[2].bsID].Z;
-	b1p1 = (pow(x1,2) - pow(x3,2)) / ( 2 * (y1 - y3) );
-	b2p1 = (pow(x2,2) - pow(x3,2)) / ( 2 * (y2 - y3) );
-	k1 = (x3 - x1) / (y1 - y3);
-	k2 = (x3 - x1) / (y2 - y3);
+	//console.log("x_1: "+x1);
+	//console.log("x_2: "+x2);
+	//console.log("x_3: "+x3);
+	//console.log("y_1: "+y1);
+	//console.log("y_2: "+y2);
+	//console.log("y_3: "+y3);
+	b1p1 = (Math.pow(x3,2) - Math.pow(x1,2) + Math.pow(y3,2) - Math.pow(y1,2)) / ( 2 * (y3 - y1) );
+	b2p1 = (Math.pow(x3,2) - Math.pow(x2,2) + Math.pow(y3,2) - Math.pow(y2,2)) / ( 2 * (y3 - y2) );
+	//console.log("b1p1: "+b1p1);
+	//console.log("b2p1: "+b2p1);
+	k1 = (x1 - x3) / (y3 - y1);
+	k2 = (x2 - x3) / (y3 - y2);
+	//console.log("k1: "+k1);
+	//console.log("k2: "+k2);
 	/*d1,d2,d3*/
 	rssi1 = recorder[0].rssi;
 	rssi2 = recorder[1].rssi;
 	rssi3 = recorder[2].rssi;
+	console.log("rssi1: "+recorder[0].rssi);
+	console.log("rssi2: "+recorder[1].rssi);
+	console.log("rssi3: "+recorder[2].rssi);
+	d3 = 1;
+	d2 = 1;
+	d1 = 1.414;
 	/*calcu*/
-	var dValue31 = pow(d3,2) - pow(d1,2);
-	var dValue32 = pow(d3,2) - pow(d2,2);
-	var b1p2 = dValue31 / ( 2 * (y1 - y3) );
-	var b2p2 = dValue32 / ( 2 * (y2 - y3) );
+	var dValue31 = Math.pow(d1,2) - Math.pow(d3,2);
+	var dValue32 = Math.pow(d2,2) - Math.pow(d3,2);
+	var b1p2 = dValue31 / ( 2 * (y3 - y1) );
+	var b2p2 = dValue32 / ( 2 * (y3 - y2) );
+	//console.log("b1p2: "+b1p2);
+	//console.log("b2p2: "+b2p2);
 	var b1 = b1p1 + b1p2;
 	var b2 = b2p1 + b2p2;
 	x = ( b2 - b1 ) / ( k1 - k2 );
 	y = ( b2 * k1 - b1 * k2 ) / ( k1 - k2 );
+	console.log("sensor_X: "+x.toString());
+	console.log("sensor_Y: "+y.toString());
+	console.log(y);
 }
 
 function checkMsg(msg) {

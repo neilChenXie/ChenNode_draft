@@ -1,0 +1,11 @@
+Time: 1429739838471 /home/chen/Dropbox/Project/Nodejs-server/APIserver/server TypeError: Cannot read property 'X' of undefined
+    at localize (/home/chen/Dropbox/Project/Nodejs-server/APIserver/router/handler/apiProject/skyTmote.js:162:36)
+    at calcu (/home/chen/Dropbox/Project/Nodejs-server/APIserver/router/handler/apiProject/skyTmote.js:127:5)
+    at save (/home/chen/Dropbox/Project/Nodejs-server/APIserver/router/handler/apiProject/skyTmote.js:49:2)
+    at Layer.handle [as handle_request] (/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/express/lib/router/layer.js:82:5)
+    at next (/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/express/lib/router/route.js:110:13)
+    at Route.dispatch (/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/express/lib/router/route.js:91:3)
+    at Layer.handle [as handle_request] (/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/express/lib/router/layer.js:82:5)
+    at /home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/express/lib/router/index.js:267:22
+    at Function.proto.process_params (/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/express/lib/router/index.js:321:12)
+    at next (/home/chen/Dropbox/Project/Nodejs-server/APIserver/node_modules/express/lib/router/index.js:261:10)
