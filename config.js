@@ -5,7 +5,8 @@ var serverConfig = {
 	port:8080
 };
 var fileConfig = {
-	downloadBase:"/home/chen/Documents/"
+	downloadBase:"/home/chen/Documents/",
+	uploadBase:"/home/chen/Documents/download/"
 };
 var config = {
 	server:serverConfig,

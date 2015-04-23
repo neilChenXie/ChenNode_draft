@@ -2,12 +2,36 @@ var fs = require('fs');
 var mime = require('mime');
 var config = require('../../config.js').config();
 var rv = {
+	index:index,
 	upload:uploadHanddler,
+	uploadProcess:uploadProcess,
 	download:downloadHanddler
 };
 
+function index(req, res) {
+	res.render('index',
+			{title:'Home'}
+			);
+}
 function uploadHanddler(req, res) {
-	res.status(200).send("funciton not finished");
+	//res.status(200).send("funciton not finished");
+	res.status(200);
+	res.render('upload',
+			{title:'Upload'}
+			);
+}
+function uploadProcess(req,res) {
+	//console.log(req.files.displayImage.path);
+	var fstream;
+	req.pipe(req.busboy);
+	req.busboy.on('file', function (fieldname, file, filename) {
+		console.log("Uploading: " + filename); 
+		fstream = fs.createWriteStream(config.file.uploadBase + filename);
+		file.pipe(fstream);
+		fstream.on('close', function () {
+			res.redirect('back');
+		});
+	});
 }
 
 function downloadHanddler(req, res) {

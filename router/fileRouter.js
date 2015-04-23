@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var config = require("../config").config();
 var handler = require('./handler/handler').get();
+var busboy = require("connect-busboy");
 
 /* middleware specific to this router */
 router.use(function timeLog(req, res, next) {
@@ -24,13 +25,15 @@ router.use(function timeLog(req, res, next) {
 /*****************************************/
 
 /************get functions************/
-router.get('/', handler.test.timeoutTest);
+router.get('/timeout', handler.test.timeoutTest);
 router.get('/test', handler.test.jsonTest);
 
 /************post functions***********/
+router.post('/upload/process',busboy(),handler.file.uploadProcess);
 
 /************file functions***********/
-router.get('/upload/*',handler.file.upload);
+router.get('/index',handler.file.index);
+router.get('/upload',handler.file.upload);
 router.get('/download/*',handler.file.download);
 
 /************err function*************/

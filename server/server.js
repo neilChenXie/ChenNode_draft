@@ -2,7 +2,8 @@ var fs = require("fs");
 var util = require("util");
 var express = require("express");
 var bodyParser = require("body-parser");
-var multer = require("multer");
+//var multer = require("multer");
+var busboy = require('connect-busboy');
 var stylus = require("stylus");
 var nib = require("nib");
 var app = express();
@@ -42,8 +43,11 @@ function start() {
 	/* to handle POST and JSON format */
 	app.use(bodyParser.urlencoded({ extended: false}));
 	app.use(bodyParser.json({ type: 'application/json' }));
+	
 	/* to upload file */
-	app.use(multer({ dest: './file/uploads/'}));
+	//app.use(multer({ dest: '~/Documents/download/'}));
+	app.use(busboy());
+
 	/* to use jade & stylus */
 	app.set('views', __dirname + '/../views');
 	app.set('view engine', 'jade');
@@ -52,12 +56,7 @@ function start() {
 		compile: compile
 	}));
 	app.use(express.static(__dirname + '/../public'));
-		/* jade & stylus test */
-	app.get('/', function(req, res){
-		res.render('index',
-		{title:'Home'}
-		);
-	});
+
 	/*set route*/
 	app.use('/api',apiRouter);
 	app.use('/file',fileRouter);
