@@ -2,6 +2,9 @@ var fs = require("fs");
 var util = require("util");
 var express = require("express");
 var bodyParser = require("body-parser");
+var multer = require("multer");
+var stylus = require("stylus");
+var nib = require("nib");
 var app = express();
 
 /*configuration*/
@@ -27,11 +30,34 @@ console.error = function(d) {
 	stdout.write(util.format(msgHead+__dirname+" "+d) + '\n');
 };
 
+/* for stylus */
+function compile(str, path) {
+	return stylus(str)
+		.set('filename', path)
+		.use(nib());
+}
+
 function start() {
 
-	/*to handle POST and JSON format*/
+	/* to handle POST and JSON format */
 	app.use(bodyParser.urlencoded({ extended: false}));
 	app.use(bodyParser.json({ type: 'application/json' }));
+	/* to upload file */
+	app.use(multer({ dest: './file/uploads/'}));
+	/* to use jade & stylus */
+	app.set('views', __dirname + '/../views');
+	app.set('view engine', 'jade');
+	app.use(stylus.middleware({ 
+		src: __dirname + '/../public',
+		compile: compile
+	}));
+	app.use(express.static(__dirname + '/../public'));
+		/* jade & stylus test */
+	app.get('/', function(req, res){
+		res.render('index',
+		{title:'Home'}
+		);
+	});
 	/*set route*/
 	app.use('/api',apiRouter);
 	app.use('/file',fileRouter);

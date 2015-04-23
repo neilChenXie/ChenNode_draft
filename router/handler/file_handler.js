@@ -2,8 +2,13 @@ var fs = require('fs');
 var mime = require('mime');
 var config = require('../../config.js').config();
 var rv = {
+	upload:uploadHanddler,
 	download:downloadHanddler
 };
+
+function uploadHanddler(req, res) {
+	res.status(200).send("funciton not finished");
+}
 
 function downloadHanddler(req, res) {
 	var allElement = req.url.split('/');

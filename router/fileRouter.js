@@ -30,6 +30,7 @@ router.get('/test', handler.test.jsonTest);
 /************post functions***********/
 
 /************file functions***********/
+router.get('/upload/*',handler.file.upload);
 router.get('/download/*',handler.file.download);
 
 /************err function*************/

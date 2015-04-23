@@ -11,3 +11,4 @@ Notes:
 2015-0420: add RTT-estimation like RSSI algorithm in /api/skyTmote project. Managed models folder.
 2015-0421: fix log time stamp bug, and Localization algorithm in /api/skyTmote project.
 2015-0422: fix bugs in coordinate algorithm
+2015-0422: add jade & stylus to support HTML and CSS for nodejs server
