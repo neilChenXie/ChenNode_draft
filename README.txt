@@ -6,6 +6,7 @@ npm module:
 	stylus
 	nib
 	multer
+	busboy
 
 Notes:
 2015-0412: add fileConfig in config.js, make download source folder changable
@@ -16,3 +17,4 @@ Notes:
 2015-0421: fix log time stamp bug, and Localization algorithm in /api/skyTmote project.
 2015-0422: fix bugs in coordinate algorithm
 2015-0422: add jade & stylus to support HTML and CSS for nodejs server
+2015-0423: add file upload
