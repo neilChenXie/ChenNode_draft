@@ -9,7 +9,7 @@ router.use(function timeLog(req, res, next) {
 	var entry;
 	entry = "/api ";
 	entry += "PATH: "+req.url;
-	console.log(entry);
+	console.cDebug(entry,req);
 	/*set timeout*/
 	res.setTimeout(config.router.timeout, function(){
 		/*send timeout status back*/
@@ -17,7 +17,7 @@ router.use(function timeLog(req, res, next) {
 		/*print err msg*/
 		entry += "Timeout";
 		entry = "err: " + entry;
-		console.error(entry);
+		console.cError(entry, req);
 	});
 	next();
 });

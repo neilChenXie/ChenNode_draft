@@ -1,7 +1,1 @@
-Time: 1429817793515 server :0.0.0.0:8080
-Time: 1429817809977 /api PATH: /skyTmote/save
-Time: 1429817809979 --------------info--------------
-Time: 1429817809980 
-Time: 1429817811340 /api PATH: /skyTmote/save
-Time: 1429817811341 --------------info--------------
-Time: 1429817811341 
+Time: 1429901929268 reqIndex: 1 reqType: GET /file PATH: /download/1/zip

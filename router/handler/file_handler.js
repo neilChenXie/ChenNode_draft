@@ -4,7 +4,6 @@ var config = require('../../config.js').config();
 var rv = {
 	index:index,
 	upload:uploadHanddler,
-	uploadProcess:uploadProcess,
 	download:downloadHanddler
 };
 
@@ -13,34 +12,38 @@ function index(req, res) {
 			{title:'Home'}
 			);
 }
-function uploadHanddler(req, res) {
-	//res.status(200).send("funciton not finished");
-	res.status(200);
-	res.render('upload',
-			{title:'Upload'}
-			);
-}
-function uploadProcess(req,res) {
-	//console.log(req.files.displayImage.path);
+
+/* upload related function */
+
+function uploadHanddler(req,res) {
+	//console.cDebug(req.files.displayImage.path);
 	var fstream;
 	req.pipe(req.busboy);
 	req.busboy.on('file', function (fieldname, file, filename) {
-		console.log("Uploading: " + filename); 
-		fstream = fs.createWriteStream(config.file.uploadBase + filename);
-		file.pipe(fstream);
-		fstream.on('close', function () {
+		if( filename !== '' ) {
+			console.cDebug("Uploading: " + filename, req); 
+			fstream = fs.createWriteStream(config.file.uploadBase + filename);
+			/* write to disk*/
+			file.pipe(fstream);
+
+			/* end of transfer */
+			fstream.on('close', function () {
+				res.redirect('back');
+			});
+
+		}else {
 			res.redirect('back');
-		});
+		}
 	});
 }
+/* * * * * * * *  * * * * * */
 
+/* download related function */
 function downloadHanddler(req, res) {
 	var allElement = req.url.split('/');
 	var filename = allElement[allElement.length - 1];
-	var	down_path = req.url;
-	//var file = __dirname + '/../..'+down_path;
-	var file = config.file.downloadBase+down_path;
-	//console.log(file);
+	//var	down_path = req.url;
+	var file = config.file.downloadBase+filename;
 
 	fs.exists(file,function(exist) {
 		if(exist) {
@@ -59,9 +62,9 @@ function downloadHanddler(req, res) {
 			//filestream.pipe(res);
 			res.download(file, function(err) {
 				if(err) {
-					console.error(err);
+					console.cError(err,req);
 				} else {
-					console.log("download succeed");
+					console.cDebug("download succeed", req);
 				}
 			});
 		} else {
@@ -69,10 +72,11 @@ function downloadHanddler(req, res) {
 			/*file noe exist*/
 			msg = "file is not exist";
 			res.send(msg);
-			console.error(req.url+" "+msg);
+			console.cError(req.url+" "+msg, req);
 		}
 	});
 }
+/* * * * * * * * * * * * * */
 
 /*exports the module*/
 exports.get = function() {

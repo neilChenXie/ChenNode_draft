@@ -10,7 +10,7 @@ router.use(function timeLog(req, res, next) {
 	var entry;
 	entry = "/file ";
 	entry += "PATH: "+req.url;
-	console.log(entry);
+	console.cDebug(entry, req);
 	/*set timeout*/
 	res.setTimeout(config.router.timeout, function(){
 		/*send timeout status back*/
@@ -18,7 +18,7 @@ router.use(function timeLog(req, res, next) {
 		/*print err msg*/
 		entry += "Timeout";
 		entry = "err: " + entry;
-		console.log(entry);
+		console.cError(entry, req);
 	});
 	next();
 });
@@ -29,11 +29,11 @@ router.get('/timeout', handler.test.timeoutTest);
 router.get('/test', handler.test.jsonTest);
 
 /************post functions***********/
-router.post('/upload/process',busboy(),handler.file.uploadProcess);
+router.post('/upload/process', handler.file.upload);
 
 /************file functions***********/
 router.get('/index',handler.file.index);
-router.get('/upload',handler.file.upload);
+router.get('/upload',handler.page.file.uploadPage);
 router.get('/download/*',handler.file.download);
 
 /************err function*************/

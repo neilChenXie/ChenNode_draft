@@ -22,7 +22,7 @@ var sensorTime = [];
 
 /*save information function*/
 function save(req, res) {
-	console.log('--------------info--------------');
+	console.cDebug('--------------info--------------');
 	res.status(200);
 
 	/*get POST message body and Check*/
@@ -32,9 +32,9 @@ function save(req, res) {
 	/* record */
 	if(rv.sucFlag) {
 		console.info(rv.recEntry);
-		console.log(rv.recEntry);
+		console.cDebug(rv.recEntry);
 	} else {
-		console.error(rv.rtnEntry);
+		console.cError(rv.rtnEntry);
 		return;
 	}
 
@@ -82,9 +82,9 @@ function calcu(sID, bID, rssi,timeStamp) {
 		sensorList[sID].bsList[bID].rssiAry.shift();
 		sensorList[sID].bsList[bID].rssiTime.shift();
 	}
-	//console.log(Group[index]);
-	console.log(sensorList[sID].bsList[bID].rssiAry);
-	console.log(sensorList[sID].bsList[bID].rssiTime);
+	//console.cDebug(Group[index]);
+	console.cDebug(sensorList[sID].bsList[bID].rssiAry);
+	console.cDebug(sensorList[sID].bsList[bID].rssiTime);
 
 	/* new mean */
 	if(len === 0) 
@@ -94,7 +94,7 @@ function calcu(sID, bID, rssi,timeStamp) {
 	else 
 		sensorList[sID].bsList[bID].rssiEst = (sensorList[sID].bsList[bID].rssiEst * 0.8 + 0.2 * sensorList[sID].bsList[bID].rssiAry[len-1]).toFixed(2);
 
-	console.log(sensorList[sID].bsList[bID].rssiEst);
+	console.cDebug(sensorList[sID].bsList[bID].rssiEst);
 
 	/* new deviation */
 	if( len == 10) {
@@ -103,7 +103,7 @@ function calcu(sID, bID, rssi,timeStamp) {
 			squSum += Math.pow((sensorList[sID].bsList[bID].rssiAry[i] - sensorList[sID].bsList[bID].rssiEst),2);
 		}
 		sensorList[sID].bsList[bID].rssiDev = (squSum / 10).toFixed(2);
-		console.log(sensorList[sID].bsList[bID].rssiDev);
+		console.cDebug(sensorList[sID].bsList[bID].rssiDev);
 	}
 
 	/* decide whether need coordinate calculation */
@@ -131,9 +131,9 @@ function calcu(sID, bID, rssi,timeStamp) {
 			/* do nothing for overtime packet here */
 		}
 	}
-	console.log("new index:" + sensorTime[sID]);
-	console.log("sensor counter:" + sensorCount[sID]);
-	console.log('---------------------------------');
+	console.cDebug("new index:" + sensorTime[sID]);
+	console.cDebug("sensor counter:" + sensorCount[sID]);
+	console.cDebug('---------------------------------');
 }
 
 function localize(sID, timeStamp) {
@@ -144,9 +144,9 @@ function localize(sID, timeStamp) {
 	recorder[2] = Object.create(null);
 	var index = 0;
 	for(var i in sensorList[sID].bsList) {
-		//console.log(i);
-		//console.log("time stamp: "+timeStamp);
-		//console.log("sensor last: "+sensorList[sID].bsList[i].rssiTime[9]);
+		//console.cDebug(i);
+		//console.cDebug("time stamp: "+timeStamp);
+		//console.cDebug("sensor last: "+sensorList[sID].bsList[i].rssiTime[9]);
 		if(sensorList[sID].bsList[i].rssiTime[9] >= timeStamp) {
 			/* need record */
 			recorder[index].bsID = i;
@@ -167,27 +167,27 @@ function localize(sID, timeStamp) {
 	z1 = baseStation[recorder[0].bsID].Z;
 	z2 = baseStation[recorder[1].bsID].Z;
 	z3 = baseStation[recorder[2].bsID].Z;
-	//console.log("x_1: "+x1);
-	//console.log("x_2: "+x2);
-	//console.log("x_3: "+x3);
-	//console.log("y_1: "+y1);
-	//console.log("y_2: "+y2);
-	//console.log("y_3: "+y3);
+	//console.cDebug("x_1: "+x1);
+	//console.cDebug("x_2: "+x2);
+	//console.cDebug("x_3: "+x3);
+	//console.cDebug("y_1: "+y1);
+	//console.cDebug("y_2: "+y2);
+	//console.cDebug("y_3: "+y3);
 	b1p1 = (Math.pow(x3,2) - Math.pow(x1,2) + Math.pow(y3,2) - Math.pow(y1,2)) / ( 2 * (y3 - y1) );
 	b2p1 = (Math.pow(x3,2) - Math.pow(x2,2) + Math.pow(y3,2) - Math.pow(y2,2)) / ( 2 * (y3 - y2) );
-	//console.log("b1p1: "+b1p1);
-	//console.log("b2p1: "+b2p1);
+	//console.cDebug("b1p1: "+b1p1);
+	//console.cDebug("b2p1: "+b2p1);
 	k1 = (x1 - x3) / (y3 - y1);
 	k2 = (x2 - x3) / (y3 - y2);
-	//console.log("k1: "+k1);
-	//console.log("k2: "+k2);
+	//console.cDebug("k1: "+k1);
+	//console.cDebug("k2: "+k2);
 	/*d1,d2,d3*/
 	rssi1 = recorder[0].rssi;
 	rssi2 = recorder[1].rssi;
 	rssi3 = recorder[2].rssi;
-	console.log("rssi1: "+recorder[0].rssi);
-	console.log("rssi2: "+recorder[1].rssi);
-	console.log("rssi3: "+recorder[2].rssi);
+	console.cDebug("rssi1: "+recorder[0].rssi);
+	console.cDebug("rssi2: "+recorder[1].rssi);
+	console.cDebug("rssi3: "+recorder[2].rssi);
 	d3 = 1;
 	d2 = 1;
 	d1 = 1.414;
@@ -196,15 +196,15 @@ function localize(sID, timeStamp) {
 	var dValue32 = Math.pow(d2,2) - Math.pow(d3,2);
 	var b1p2 = dValue31 / ( 2 * (y3 - y1) );
 	var b2p2 = dValue32 / ( 2 * (y3 - y2) );
-	//console.log("b1p2: "+b1p2);
-	//console.log("b2p2: "+b2p2);
+	//console.cDebug("b1p2: "+b1p2);
+	//console.cDebug("b2p2: "+b2p2);
 	var b1 = b1p1 + b1p2;
 	var b2 = b2p1 + b2p2;
 	x = ( b2 - b1 ) / ( k1 - k2 );
 	y = ( b2 * k1 - b1 * k2 ) / ( k1 - k2 );
-	console.log("sensor_X: "+x.toString());
-	console.log("sensor_Y: "+y.toString());
-	console.log(y);
+	console.cDebug("sensor_X: "+x.toString());
+	console.cDebug("sensor_Y: "+y.toString());
+	console.cDebug(y);
 }
 
 function checkMsg(msg) {

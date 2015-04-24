@@ -18,7 +18,7 @@ function notFoundHandler(req,res) {
 			//res.type('png');
 			res.sendFile(file);
 		} else {
-			console.error("404.png is not there");
+			console.cError("404.png is not there", req);
 			res.send("not found");
 		}
 	});

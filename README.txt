@@ -18,3 +18,4 @@ Notes:
 2015-0422: fix bugs in coordinate algorithm
 2015-0422: add jade & stylus to support HTML and CSS for nodejs server
 2015-0423: add file upload
+2015-0424: changed log system, move file upload page from file_handler to page_handler
