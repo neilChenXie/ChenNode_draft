@@ -1,1 +1,8 @@
-Time: 1429901929268 reqIndex: 1 reqType: GET /file PATH: /download/1/zip
+Time: 1429984102040 reqIndex: 1 reqType: GET /page PATH: /upload
+Time: 1429984102041 reqIndex: 1 reqType: GET handler:page.file.uploadPage
+Time: 1429984111728 reqIndex: 3 reqType: GET /page PATH: /upload
+Time: 1429984111728 reqIndex: 3 reqType: GET handler:page.file.uploadPage
+Time: 1429984120353 reqIndex: 5 reqType: POST /file PATH: /upload
+Time: 1429984120358 reqIndex: 5 reqType: POST Uploading: DSC_4474.jpg
+Time: 1429984120380 reqIndex: 6 reqType: GET /page PATH: /upload
+Time: 1429984120380 reqIndex: 6 reqType: GET handler:page.file.uploadPage

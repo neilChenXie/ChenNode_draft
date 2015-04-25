@@ -1,22 +1,36 @@
-var routerConfig = {
-	timeout:2000000
+
+/* server.js */
+var server = {
+	port:8080,
+	router_base:__dirname + "/router/",
+	log_debug_base:__dirname + "/log/debug.txt",
+	log_error_base:__dirname + "/log/error.txt"
 };
 
-/* for server/server.js configuration */
-var serverConfig = {
-	port:8080,
-	log_debug_base:"/../log/debug.txt",
-	log_error_base:"/../log/error.txt"
+/* router/*router.js */
+var router = {
+	timeout:2000000,
+	handler_base:__dirname + "/handler/"
 };
-var fileConfig = {
+/* handler/*handler.js */
+var file = {
 	downloadBase:"/home/chen/Documents/download/",
 	uploadBase:"/home/chen/Documents/download/"
 };
-var config = {
-	server:serverConfig,
-	router:routerConfig,
-	file:fileConfig
+
+/* handler/apiProject/*.js */
+var skyTmote = {
+	log_base: __dirname + "/log/skyTmote/",
+	model_base: __dirname + "/models/skyTmote/"
 };
+
+var config = {
+	server:server,
+	router:router,
+	file:file,
+	skyTmote:skyTmote
+};
+
 exports.config = function () {
 	return config;
 };

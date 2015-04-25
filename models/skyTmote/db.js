@@ -8,10 +8,10 @@ function start() {
 		db = new mysql.createConnection(dbInfo);
 		db.connect(function(err){ 
 			if(err) {
-				console.error(err);
+				console.cError(err);
 				return -1;
 			}
-			console.log("database connection setup successfully");
+			console.cDebug("database connection setup successfully");
 			return db;
 		});
 	}
@@ -20,33 +20,53 @@ function start() {
 
 function addBS (bsObj) {
 	if(db) {
-		qS = "INSERT INTO BaseStation VALUES ("+bsObj.bsID+","+bsObj.X+","+bsObj.Y+","+bsObj.Z+");"; 
-		db.query(qS,function (err,res){
+		query1 = "SELECT * FROM BaseStation WHERE bsID="+bsObj.bsID;
+		db.query(query1, function(err, res){
 			if(err) {
-				console.error(err);
+				console.log("err "+err);
 			} else {
-				console.log(res);
+				if(res.length < 1) {
+					/* insert new one*/
+					qS = "INSERT INTO BaseStation VALUES ("+bsObj.bsID+","+bsObj.X+","+bsObj.Y+","+bsObj.Z+");"; 
+					db.query(qS,function (err,res){
+						if(err) {
+							console.error(err);
+						} else {
+							console.log("insert suc");
+						}
+					});
+				} else {
+					/* update the value */
+					qS = "UPDATE BaseStation SET X="+bsObj.X+", Y="+bsObj.Y+", Z="+bsObj.Z+" WHERE bsID="+bsObj.bsID+";"; 
+					db.query(qS,function (err,res){
+						if(err) {
+							console.error(err);
+						} else {
+							console.log("insert suc");
+						}
+					});
+				}
 			}
 		});
 	} else {
-		console.error("Function: "+arguments.callee.name+" Should connect database first");
+		console.cError("Function: "+arguments.callee.name+" Should connect database first");
 	}
 }
 
-function addRaw(lineObj) {
+function addLoc(lineObj) {
 	if(db) {
-		qS = "INSERT INTO Raw VALUES (null,"+lineObj.bsID+","+lineObj.sensorID+","+lineObj.rssi+")";
+		qS = "INSERT INTO Sensor VALUES ("+lineObj.sID+","+lineObj.timeStamp+","+lineObj.X+","+lineObj.Y+")";
 		db.query(qS,function (err,res){
 			if(err) {
-				console.error(err);
+				console.cError(err);
 			} else {
-				console.log(res);
+				console.cDebug(res);
 			}
 		});
 	} else {
-		console.error("Function: "+arguments.callee.name+" Should connect database first");
+		console.cError("Function: "+arguments.callee.name+" Should connect database first");
 	}
 }
 exports.start = start;
 exports.addBS = addBS;
-exports.addRaw = addRaw;
+exports.addLoc = addLoc;

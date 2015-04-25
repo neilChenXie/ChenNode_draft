@@ -1,7 +1,7 @@
+var config = require("../config").config();
 var express = require("express");
 var router = express.Router();
-var config = require("../config").config();
-var handler = require('./handler/handler').get();
+var handler = require(config.router.handler_base + 'handler').get();
 
 /* middleware specific to this router */
 router.use(function timeLog(req, res, next) {
@@ -25,6 +25,8 @@ router.use(function timeLog(req, res, next) {
 /************get functions************/
 router.get('/', handler.test.timeoutTest);
 router.get('/test', handler.test.jsonTest);
+
+router.get('/upload',handler.page.file.uploadPage);
 
 
 /************err function*************/
