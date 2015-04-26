@@ -20,3 +20,4 @@ Notes:
 2015-0423: add file upload
 2015-0424: changed log system, move file upload page from file_handler to page_handler
 2015-0425: make the system portable with any Linux system by rewriting config file, and module require way in all files, remove timeout in router,
+2015-0426:create session function, finished package.json

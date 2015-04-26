@@ -1,0 +1,38 @@
+{
+	"name": "Chen-Node",
+	"description":"Nodejs server platform",
+	"version": "0.1.0",
+	"author":"Chen Xie",
+	"repository": {
+		"type":"git",
+		"url":"http://github.com/neilChenXie/ChenServer.git"
+	},
+	"dependencies": {
+		"express": "4.x",
+		"cookie-parser":"^1.3.4",
+		"body-parser":"^1.12.3",
+		"connect-busboy":"^0.0.2",
+		"connect-timeout":"^1.6.1",
+		"forever-monitor":"^1.5.2",
+		"jade":"^1.9.2",
+		"mime":"1.3.4",
+		"multer":"^0.1.8",
+		"mysql":"^2.6.1",
+		"nib":"^1.1.0",
+		"stylus":"^0.50.0"
+	},
+	"files": [
+		"config.js",
+		"README.txt",
+		"router/",
+		"handler/",
+		"models",
+		"views/",
+		"public/",
+		"log/"
+	],
+	"main":"./index.js",
+	"engines":{
+		"node":">=0.10.33"
+	}
+}
