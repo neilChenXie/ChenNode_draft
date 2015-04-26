@@ -6,7 +6,7 @@ var multer = require("multer");
 var busboy = require('connect-busboy');
 var stylus = require("stylus");
 var nib = require("nib");
-
+var timeout = require("connect-timeout");
 /* system structure */
 var app = express();
 var api = express();
@@ -107,6 +107,8 @@ function start() {
 	});
 
 	app.use(express.static(__dirname + '/public'));
+	app.use(timeout('100s'));
+	app.use(haltOnTimeout);
 	
 	apiConfig();
 	pageConfig();
@@ -122,6 +124,14 @@ function start() {
 				console.log("server :"+host+":"+port);
 			}
 	);
+}
+
+function haltOnTimeout(req,res,next) {
+	if(!req.timeout) next();
+	else {
+		console.cError("request time out");
+		res.sendStatus(408);
+	}
 }
 
 

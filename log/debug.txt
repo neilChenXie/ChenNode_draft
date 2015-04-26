@@ -1,8 +1,9 @@
-Time: 1430021602835 reqIndex: 1 reqType: GET /api PATH: /about
-Time: 1430021610029 reqIndex: 2 reqType: GET /file PATH: /upload/
-Time: 1430021610044 reqIndex: 3 reqType: GET /page PATH: /upload
-Time: 1430021610044 reqIndex: 3 reqType: GET handler:page.file.uploadPage
-Time: 1430021612462 reqIndex: 5 reqType: POST /file PATH: /upload
-Time: 1430021612468 reqIndex: 5 reqType: POST Uploading: DSC_4475.jpg
-Time: 1430021612504 reqIndex: 6 reqType: GET /page PATH: /upload
-Time: 1430021612504 reqIndex: 6 reqType: GET handler:page.file.uploadPage
+Time: 1430031246828 reqIndex: 1 reqType: GET /api PATH: /fileList
+Time: 1430031246839 reqIndex: 1 reqType: GET total 290M
+drwxrwxr-x 3 chen chen 4.0K Apr 25 21:13 .
+drwxr-xr-x 4 chen chen 4.0K Apr 23 12:40 ..
+-rw-rw-r-- 1 chen chen 164M Apr 11 21:44 1.zip
+drwxrwxr-x 2 chen chen 4.0K Apr 13 23:36 2015-0411Huntington beach
+-rw-rw-r-- 1 chen chen 127M Apr 13 23:39 corji.zip
+-rw-rw-r-- 1 chen chen    5 Apr 24 09:45 test.txt
+

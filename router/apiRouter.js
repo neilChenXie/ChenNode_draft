@@ -10,15 +10,6 @@ router.use(function timeLog(req, res, next) {
 	entry = "/api ";
 	entry += "PATH: "+req.url;
 	console.cDebug(entry,req);
-	/*set timeout*/
-	res.setTimeout(config.router.timeout, function(){
-		/*send timeout status back*/
-		res.sendStatus(408);
-		/*print err msg*/
-		entry += "Timeout";
-		entry = "err: " + entry;
-		console.cError(entry, req);
-	});
 	next();
 });
 /*****************************************/
@@ -26,6 +17,7 @@ router.use(function timeLog(req, res, next) {
 /************get functions************/
 router.get('/', handler.test.timeoutTest);
 router.get('/test', handler.test.jsonTest);
+router.get('/fileList', handler.api.fileList);
 
 /************post functions***********/
 router.post('/JSONecho',handler.test.JSONecho);

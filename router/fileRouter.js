@@ -11,15 +11,6 @@ router.use(function timeLog(req, res, next) {
 	entry = "/file ";
 	entry += "PATH: "+req.url;
 	console.cDebug(entry, req);
-	/*set timeout*/
-	res.setTimeout(config.router.timeout, function(){
-		/*send timeout status back*/
-		res.sendStatus(408);
-		/*print err msg*/
-		entry += "Timeout";
-		entry = "err: " + entry;
-		console.cError(entry, req);
-	});
 	next();
 });
 /*****************************************/

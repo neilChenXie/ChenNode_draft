@@ -4,6 +4,7 @@ var user = "chen";
 /* server.js */
 var server = {
 	port:8080,
+	timeout:'600s',
 	router_base:__dirname + "/router/",
 	log_debug_base:__dirname + "/log/debug.txt",
 	log_error_base:__dirname + "/log/error.txt"
@@ -11,7 +12,6 @@ var server = {
 
 /* router/*router.js */
 var router = {
-	timeout:2000000,
 	handler_base:__dirname + "/handler/"
 };
 /* handler/*handler.js */
