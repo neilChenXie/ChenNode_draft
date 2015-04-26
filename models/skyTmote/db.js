@@ -60,7 +60,8 @@ function addLoc(lineObj) {
 			if(err) {
 				console.cError(err);
 			} else {
-				console.cDebug(res);
+				//console.cDebug(res);
+				console.cDebug("add sensor Loc suc");
 			}
 		});
 	} else {

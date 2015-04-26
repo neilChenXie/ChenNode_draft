@@ -49,6 +49,7 @@ function save(req, res) {
 		baseStation[msg.bsID].X = parseFloat(msg.bsLocX);
 		baseStation[msg.bsID].Y = parseFloat(msg.bsLocY);
 		baseStation[msg.bsID].Z = parseFloat(msg.bsLocZ);
+		console.log(baseStation[msg.bsID].X);
 
 		/* write new base station info into data base */
 		myDB.addBS(baseStation[msg.bsID]);

@@ -1,3 +1,5 @@
+/*need modification for portable*/
+var user = "chen";
 
 /* server.js */
 var server = {
@@ -14,8 +16,8 @@ var router = {
 };
 /* handler/*handler.js */
 var file = {
-	downloadBase:"/home/chen/Documents/download/",
-	uploadBase:"/home/chen/Documents/download/"
+	downloadBase:"/home/"+user+"/Documents/download/",
+	uploadBase:"/home/"+user+"/Documents/download/"
 };
 
 /* handler/apiProject/*.js */
