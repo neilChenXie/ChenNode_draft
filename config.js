@@ -3,7 +3,7 @@ var user = "chen";
 
 /* server.js */
 var server = {
-	port:8080,
+	port:3000,
 	timeout:'600s',
 	router_base:__dirname + "/router/",
 	log_debug_base:__dirname + "/log/debug.txt",

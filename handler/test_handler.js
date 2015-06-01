@@ -9,7 +9,7 @@ function jsonTest(req,res) {
 function JSONecho(req,res) {
 	var jsonMsg = req.body;
 	//console.cDebug();
-	res.tyep('json');
+	res.type('json');
 	res.status(200).send(jsonMsg);
 }
 

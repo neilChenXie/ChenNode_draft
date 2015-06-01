@@ -107,8 +107,8 @@ function start() {
 	});
 
 	app.use(express.static(__dirname + '/public'));
-	app.use(timeout('100s'));
-	app.use(haltOnTimeout);
+	//app.use(timeout('100s'));
+	//app.use(haltOnTimeout);
 	
 	apiConfig();
 	pageConfig();

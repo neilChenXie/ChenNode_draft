@@ -48,6 +48,7 @@ function downloadHanddler(req, res) {
 			
 			/*set MIME type*/
 			mimetype = mime.lookup(file);
+			//console.log(mimetype);
 			//res.setHeader("Content-type",mimetype);
 			res.type(mimetype);
 
@@ -67,7 +68,7 @@ function downloadHanddler(req, res) {
 			});
 
 			/* go back */
-			res.redirect('back');
+			//res.redirect('back');
 		} else {
 
 			/*file noe exist*/
